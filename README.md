@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Multilingual FAQ System
 
-## Getting Started
+This project is a multilingual FAQ system built with Next.js, Prisma, Redis, and Google Gemini for translations. It allows users to retrieve FAQs in different languages, with automatic translation support for common languages like Hindi and Bengali.
 
-First, run the development server:
+## Features
+
+- **Multilingual Support**: Fetch FAQs in different languages (e.g., English, Hindi, Bengali).
+- **Automatic Translation**: Uses Google Gemini to automatically translate questions and answers.
+- **Caching with Redis**: FAQs are cached for improved performance.
+- **Easy to Extend**: Adding new languages or translating other content is simple.
+
+## Tech Stack
+
+- **Next.js**: React framework for building the frontend and API routes.
+- **Prisma**: ORM for interacting with the database.
+- **Redis**: Caching to improve performance and reduce API calls.
+- **Google Gemini API**: Used for translating FAQ content into multiple languages.
+- **Jest**: Testing framework for unit and integration tests.
+- **TypeScript**: For static type checking and better developer experience.
+
+## Setup Instructions
+
+### Prerequisites
+
+1. **Node.js**: Ensure you have Node.js installed. You can download it from [here](https://nodejs.org/).
+2. **Redis**: Make sure you have a Redis instance running. You can use a local Redis instance or a managed Redis service like [Redis Labs](https://redislabs.com/).
+3. **Google Gemini API Key**: Sign up for Google Gemini and get your API key, which will be required for translations. Store it in your `.env` file.
+
+### Clone the repository
+
+```bash
+git clone https://github.com/your-username/multilingual-faq-system.git
+cd multilingual-faq-system
+```
+
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Create a .env file
+
+Create a `.env` file in the root directory of the project and add the following variables:
+
+```bash
+DATABASE_URL=your-database-url
+REDIS_URL=your-redis-url
+GEMINI_API_KEY=your-google-generative-ai-api-key
+```
+
+Replace `your-database-url`, `your-redis-url`, and `your-google-generative-ai-api-key` with your actual values.
+
+### Create a database
+
+Run the following command to create a new database:
+
+```bash
+npx prisma db push
+```
+
+This will create a new database in your database URL.
+
+### Run the application
+
+To start the application, run the following command:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This will start the application on `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## testing
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To run the tests, run the following command:
 
-## Learn More
+```bash
+npm run test
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Contributing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Contributions are welcome!

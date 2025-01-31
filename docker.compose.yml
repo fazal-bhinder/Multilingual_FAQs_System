@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # Application Service
+  app:
+    build: .
+    ports:
+      - "3000:3000"  # Exposing port 3000 for the app
+    environment:
+      - DATABASE_URL=postgresql://your-db-user:your-db-password@database:5432/your-db-name
+      - REDIS_URL=redis://redis:6379
+      - GEMINI_API_KEY=your-google-generative-ai-api-key
+    volumes:
+      - .:/usr/src/app  # Mounting the current directory for development
+    depends_on:
+      - redis  # The app depends on the Redis service
+      - database  # The app depends on the database service
+    networks:
+      - app-network
+
+  # Redis Service
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"  # Exposing port 6379 for Redis
+    networks:
+      - app-network
+
+  # PostgreSQL Database Service
+  database:
+    image: postgres:alpine
+    environment:
+      POSTGRES_USER: your-db-user
+      POSTGRES_PASSWORD: your-db-password
+      POSTGRES_DB: your-db-name
+    ports:
+      - "5432:5432"  # Exposing port 5432 for PostgreSQL
+    networks:
+      - app-network
+
+# Custom network for the services
+networks:
+  app-network:
+    driver: bridge
